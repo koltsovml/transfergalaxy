@@ -1,0 +1,74 @@
+
+    <div class="row">
+        <div class="col-md-7">
+            <table class="index-table">
+                <tbody>
+                    <tr>
+                        <th>Send amount</th>
+                        <td>100 GBP</td>
+                    </tr>
+                    <tr>
+                        <th>Fee</th>
+                        <td>4,00 GBP</td>
+                    </tr>
+                    <tr>
+                        <th>Total to pay</th>
+                        <td>104,00 GBP</td>
+                    </tr>
+                    <tr>
+                        <th>Recipient receives</th>
+                        <td>125,33 USD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+                    <a><span id="loginSendButton" onclick="gtmCallLoginUnverified(); CallAddToCart();" class="smallbtn btn-pushdown capital">Login &amp; Send</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p style="font-size: 11px; color: #333; padding-left: 5px; text-align: center; margin-top: 43px; font-family: Montserrat !important;">
+                <span>
+                    Use your promo code on the next step 
+                </span><br />
+                <span>Exchange rate </span>1 GBP=1,2533 USD
+            </p>
+        </div>
+    </div>
+<script>
+    var destinationLength = $("#DestinationNumber").attr("maxlength");
+    if ($("#DestinationNumber1").val().length == destinationLength) {
+        // setTimeout(function () {
+        // console.log($("show"))
+        // $("#loginSendButton").show();
+        //}, 1000);
+    } else {
+        //console.log($("#loginSendButton"))
+        // $("#loginSendButton").hide();
+    }
+</script>
+    <script>
+        // gtm function being called on send/ login and send button
+        function CallAddToCart() {
+            gtmCallAddToCart('GBP', 'AFG', 'CSH', 'GBR');
+        }
+
+        //Product clicks: pushed to the DL with every valid(it triggers the fee information) input on the amount field on the destination pages
+
+        gtmProductClick('GBP', 'AFG', 'CSH', 'GBR');
+
+        // Product detail impression: pushed to the DL with every valid(it triggers the fee information) input on the amount field on the destination pages, right after the product click event
+
+        gtmProductDetail('GBP', 'AFG', 'CSH', 'GBR');
+
+        // Checkout Step 2. Input amount. Input some value in the Amount field on destination page. https://transfergalaxy.com/en/destination/ (only valid inputs) So same as product click but only for logged in users.
+        var isLogged = $("#SendingCountryAlpha3").prop("disabled");
+        if (isLogged) {
+            gtmCheckoutStep2('GBP', 'AFG', 'CSH', 'GBR');
+        }
+        function CallCheckoutStep3() {
+            console.log('0')
+            gtmCheckoutStep3('AFG', '0', 'CSH', 'GBR');
+        }
+    </script>
